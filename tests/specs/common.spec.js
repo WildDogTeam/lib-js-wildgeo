@@ -17,8 +17,8 @@ var invalidGeohashes = ["", "aaa", 1, true, false, [], [1], {}, {a:1}, null, und
 var validQueryCriterias = [{center: [0,0], radius: 1000}, {center: [1,-180], radius: 1.78}, {center: [22.22,-107.77], radius: 0}, {center: [0,0]}, {center: [1,-180]}, {center: [22.22,-107.77]}, {radius: 1000}, {radius: 1.78}, {radius: 0}];
 var invalidQueryCriterias = [{}, {random: 100}, {center: [91,2], radius: 1000, random: "a"}, {center: [91,2], radius: 1000}, {center: [1,-181], radius: 1000}, {center: ["a",2], radius: 1000}, {center: [1,[1,2]], radius: 1000}, {center: [0,0], radius: -1}, {center: [null,2], radius: 1000}, {center: [1,undefined], radius: 1000}, {center: [NaN,0], radius: 1000}, {center: [1,2], radius: -10}, {center: [1,2], radius: "text"}, {center: [1,2], radius: [1,2]}, {center: [1,2], radius: null}, true, false, undefined, NaN, [], "a", 1];
 
-// 创建全局的变量，用于保存Wilddog和GeoDog变量
-var wilddogRef, geoDog, geoQueries;
+// 创建全局的变量，用于保存Wilddog和WildGeo变量
+var wilddogRef, wildGeo, geoQueries;
 
 /**********************/
 /*  HELPER FUNCTIONS  */
@@ -33,8 +33,8 @@ function beforeEachHelper(done) {
     // 在任意节点创建一个新的wilddog引用
     wilddogRef = wilddogRef.child(generateRandomString());
 
-    // 创建一个新的GeoDog
-    geoDog = neGeoDog(wilddogRef);
+    // 创建一个新的WildGeo
+    wildGeo = neWildGeo(wilddogRef);
 
     // 重置geo查询
     geoQueries = [];

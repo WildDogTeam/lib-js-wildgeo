@@ -92,28 +92,28 @@ describe("geoDogUtils Tests:", function() {
     });
 
     it("dist() calculates the distance between locations", function() {
-      expect(GeoDog.distance([90, 180], [90, 180])).toBeCloseTo(0, 0);
-      expect(GeoDog.distance([-90, -180], [90, 180])).toBeCloseTo(20015, 0);
-      expect(GeoDog.distance([-90, -180], [-90, 180])).toBeCloseTo(0, 0);
-      expect(GeoDog.distance([-90, -180], [90, -180])).toBeCloseTo(20015, 0);
-      expect(GeoDog.distance([37.7853074, -122.4054274], [78.216667, 15.55])).toBeCloseTo(6818, 0);
-      expect(GeoDog.distance([38.98719, -77.250783], [29.3760648, 47.9818853])).toBeCloseTo(10531, 0);
-      expect(GeoDog.distance([38.98719, -77.250783], [-54.933333, -67.616667])).toBeCloseTo(10484, 0);
-      expect(GeoDog.distance([29.3760648, 47.9818853], [-54.933333, -67.616667])).toBeCloseTo(14250, 0);
-      expect(GeoDog.distance([-54.933333, -67.616667], [-54, -67])).toBeCloseTo(111, 0);
+      expect(WildGeo.distance([90, 180], [90, 180])).toBeCloseTo(0, 0);
+      expect(WildGeo.distance([-90, -180], [90, 180])).toBeCloseTo(20015, 0);
+      expect(WildGeo.distance([-90, -180], [-90, 180])).toBeCloseTo(0, 0);
+      expect(WildGeo.distance([-90, -180], [90, -180])).toBeCloseTo(20015, 0);
+      expect(WildGeo.distance([37.7853074, -122.4054274], [78.216667, 15.55])).toBeCloseTo(6818, 0);
+      expect(WildGeo.distance([38.98719, -77.250783], [29.3760648, 47.9818853])).toBeCloseTo(10531, 0);
+      expect(WildGeo.distance([38.98719, -77.250783], [-54.933333, -67.616667])).toBeCloseTo(10484, 0);
+      expect(WildGeo.distance([29.3760648, 47.9818853], [-54.933333, -67.616667])).toBeCloseTo(14250, 0);
+      expect(WildGeo.distance([-54.933333, -67.616667], [-54, -67])).toBeCloseTo(111, 0);
     });
 
     it("dist() does not throw errors given valid locations", function() {
       validLocations.forEach(function(validLocation, i) {
-        expect(function() { GeoDog.distance(validLocation, [0, 0]); }).not.toThrow();
-        expect(function() { GeoDog.distance([0, 0], validLocation); }).not.toThrow();
+        expect(function() { WildGeo.distance(validLocation, [0, 0]); }).not.toThrow();
+        expect(function() { WildGeo.distance([0, 0], validLocation); }).not.toThrow();
       });
     });
 
     it("dist() throws errors given invalid locations", function() {
       invalidLocations.forEach(function(invalidLocation, i) {
-        expect(function() { GeoDog.distance(invalidLocation, [0, 0]); }).toThrow();
-        expect(function() { GeoDog.distance([0, 0], invalidLocation); }).toThrow();
+        expect(function() { WildGeo.distance(invalidLocation, [0, 0]); }).toThrow();
+        expect(function() { WildGeo.distance([0, 0], invalidLocation); }).toThrow();
       });
     });
   });
@@ -259,7 +259,7 @@ describe("geoDogUtils Tests:", function() {
         for (var j = 0; j < 1000; j++) {
           var pointLat = Math.max(-89.9, Math.min(89.9, centerLat + Math.random()*degreeRadius));
           var pointLong = wrapLongitude(centerLong + Math.random()*degreeRadius);
-          if (GeoDog.distance([centerLat, centerLong], [pointLat, pointLong]) < radius/1000) {
+          if (WildGeo.distance([centerLat, centerLong], [pointLat, pointLong]) < radius/1000) {
             expect(inQuery(queries, encodeGeohash([pointLat, pointLong]))).toBe(true);
           }
         }

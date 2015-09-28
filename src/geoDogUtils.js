@@ -57,7 +57,7 @@ var validateKey = function(key) {
   }
 
   if (typeof error !== "undefined") {
-    throw new Error("Invalid GeoDog key '" + key + "': " + error);
+    throw new Error("Invalid WildGeo key '" + key + "': " + error);
   }
 };
 
@@ -94,7 +94,7 @@ var validateLocation = function(location) {
   }
 
   if (typeof error !== "undefined") {
-    throw new Error("Invalid GeoDog location '" + location + "': " + error);
+    throw new Error("Invalid WildGeo location '" + location + "': " + error);
   }
 };
 
@@ -121,7 +121,7 @@ var validateGeohash = function(geohash) {
   }
 
   if (typeof error !== "undefined") {
-    throw new Error("Invalid GeoDog geohash '" + geohash + "': " + error);
+    throw new Error("Invalid WildGeo geohash '" + geohash + "': " + error);
   }
 };
 
@@ -414,12 +414,12 @@ var geohashQueries = function(center, radius) {
 };
 
 /**
- * 把坐标位置信息和geohash封装为一个GeoDog对象
+ * 把坐标位置信息和geohash封装为一个WildGeo对象
  * @param {Array.<number>} location  [latitude, longitude]坐标数组
  * @param {string} geohash 坐标位置的geohash值
  * @return {Object} GoeDog对象
  */
-function encodeGeoDogObject(location, geohash) {
+function encodeWildGeoObject(location, geohash) {
   validateLocation(location);
   validateGeohash(geohash);
   return {
@@ -430,14 +430,14 @@ function encodeGeoDogObject(location, geohash) {
 }
 
 /**
- * 把GeoDog解码，解码失败返回null
- * @param {Object} geoDogObj 包含地理坐标信息的GeoDog对象
+ * 把WildGeo解码，解码失败返回null
+ * @param {Object} geoDogObj 包含地理坐标信息的WildGeo对象
  * @return {?Array.<number>} location [latitude, longitude]坐标数组，如果解码失败，返回null
  */
-function decodeGeoDogObject(geoDogObj) {
+function decodeWildGeoObject(geoDogObj) {
   if (geoDogObj !== null && geoDogObj.hasOwnProperty("l") && Array.isArray(geoDogObj.l) && geoDogObj.l.length === 2) {
     return geoDogObj.l;
   } else {
-    throw new Error("Unexpected GeoDog location object encountered: " + JSON.stringify(geoDogObj));
+    throw new Error("Unexpected WildGeo location object encountered: " + JSON.stringify(geoDogObj));
   }
 }

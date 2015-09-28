@@ -120,8 +120,8 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
 
   /**
    * 更新位置信息时的回调。当某key的位置信息改变时会更新key相关的信息并且触发相关的事件
-   * 当一个key从GeoDog中删除时或者函数参数为null时，会执行必要的清理
-   * @param {string} key geodog位置信息的key
+   * 当一个key从WildGeo中删除时或者函数参数为null时，会执行必要的清理
+   * @param {string} key wildgeo位置信息的key
    * @param {?Array.<number>} location  [latitude, longitude] 数组形式的位置信息
    */
   function _updateLocation(key, location) {
@@ -132,7 +132,7 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
     var oldLocation = (_locationsTracked.hasOwnProperty(key)) ? _locationsTracked[key].location : null;
 
     // 确定参数location代表的位置是否在查询范围内
-    distanceFromCenter = GeoDog.distance(location, _center);
+    distanceFromCenter = WildGeo.distance(location, _center);
     isInQuery = (distanceFromCenter <= _radius);
 
     // 把参数传递的location添加到位置查询字典中，即使他不在查询范围内
@@ -181,7 +181,7 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
     var locationDict = _locationsTracked[key];
     delete _locationsTracked[key];
     if (typeof locationDict !== "undefined" && locationDict.isInQuery) {
-      var distanceFromCenter = (currentLocation) ? GeoDog.distance(currentLocation, _center) : null;
+      var distanceFromCenter = (currentLocation) ? WildGeo.distance(currentLocation, _center) : null;
       _fireCallbacksForKey("key_exited", key, currentLocation, distanceFromCenter);
     }
   }
@@ -191,7 +191,7 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
    * @param {Wilddog DataSnapshot} locationDataSnapshot 删除节点的数据快照
    */
   function _childAddedCallback(locationDataSnapshot) {
-    _updateLocation(locationDataSnapshot.key(), decodeGeoDogObject(locationDataSnapshot.val()));
+    _updateLocation(locationDataSnapshot.key(), decodeWildGeoObject(locationDataSnapshot.val()));
   }
 
   /**
@@ -199,7 +199,7 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
    * @param {Wilddog DataSnapshot} locationDataSnapshot 变化节点的数据快照
    */
   function _childChangedCallback(locationDataSnapshot) {
-    _updateLocation(locationDataSnapshot.key(), decodeGeoDogObject(locationDataSnapshot.val()))
+    _updateLocation(locationDataSnapshot.key(), decodeWildGeoObject(locationDataSnapshot.val()))
   }
 
   /**
@@ -211,7 +211,7 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
     var key = locationDataSnapshot.key();
     if (_locationsTracked.hasOwnProperty(key)) {
       _wilddogRef.child(key).once("value", function(snapshot) {
-        var location = snapshot.val() === null ? null : decodeGeoDogObject(snapshot.val());
+        var location = snapshot.val() === null ? null : decodeWildGeoObject(snapshot.val());
         var geohash = (location !== null) ? encodeGeohash(location) : null;
         if (!_geohashInSomeQuery(geohash)) {
           _removeLocation(key, location);
@@ -356,7 +356,7 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
       var wasAlreadyInQuery = locationDict.isInQuery;
 
       // 更新该位置到新的查询圆心的距离
-      locationDict.distanceFromCenter = GeoDog.distance(locationDict.location, _center);
+      locationDict.distanceFromCenter = WildGeo.distance(locationDict.location, _center);
 
       // 判断这个位置现在是否在查询中
       locationDict.isInQuery = (locationDict.distanceFromCenter <= _radius);
@@ -375,7 +375,7 @@ var GeoQuery = function (wilddogRef, queryCriteria) {
     // 重置控制核实触发"ready"事件的变量
     _valueEventFired = false;
 
-    // 监听新的被添加到GeoDog中的geohash，并触发正确的事件
+    // 监听新的被添加到WildGeo中的geohash，并触发正确的事件
     _listenForNewGeohashes();
   };
 

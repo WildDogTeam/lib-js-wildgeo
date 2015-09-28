@@ -24,7 +24,6 @@
     "src",
     "build",
     "tests",
-    "examples",
     "node_modules",
     "bower_components",
     "wilddog.json",

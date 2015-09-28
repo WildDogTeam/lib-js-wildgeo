@@ -3,7 +3,7 @@ var RSVP = require('rsvp');
 var args = process.argv
 
 function usage() {
-  console.log("USAGE: " + args[0] + " " + args[1] + " [--wilddog-secret <wilddog-secret>] --in-place <geodog-reference> ");
+  console.log("USAGE: " + args[0] + " " + args[1] + " [--wilddog-secret <wilddog-secret>] --in-place <wildgeo-reference> ");
   console.log("       " + args[0] + " " + args[1] + " [--wilddog-secret <wilddog-secret>] <old-reference> <new-reference>")
   console.log("WARNING: --in-place deletes old references");
   console.log("The Wilddog secret is optional. By passing the secret you can override any security rules present");
@@ -40,13 +40,13 @@ function runMigration(fromWilddog, toWilddog, inPlace) {
     var error = false;
     var promises = [];
     if (snapshot.val() === null) {
-      console.log("Not a valid GeoDog v2 reference: " + fromWilddog);
+      console.log("Not a valid WildGeo v2 reference: " + fromWilddog);
       process.exit(1);
     } else {
       snapshot.forEach(function(child) {
         var parts = child.name().split(":");
         if (parts.length < 2) {
-          console.log("Error transcribing key " + hashKeyPair + "! Not a valid GeoDog entry!");
+          console.log("Error transcribing key " + hashKeyPair + "! Not a valid WildGeo entry!");
           error = true;
         } else {
           var hash = parts[0];
@@ -69,7 +69,7 @@ function runMigration(fromWilddog, toWilddog, inPlace) {
                   return new setWithPromise(toWilddog.child(key), { "g": hash, "l": [lat, lng] }, hash);
                 }
               } else {
-                console.log("Key was removed from GeoDog while migrating: " + key);
+                console.log("Key was removed from WildGeo while migrating: " + key);
               }
             });
             promises.push(promise);
@@ -78,7 +78,7 @@ function runMigration(fromWilddog, toWilddog, inPlace) {
       });
       RSVP.all(promises).then(function(posts) {
         if (error) {
-          console.log("There were errors migrating GeoDog, please check your data and the result manually");
+          console.log("There were errors migrating WildGeo, please check your data and the result manually");
           process.exit(1);
         } else {
           console.log("Migrated " + promises.length + " keys successfully!");
@@ -99,7 +99,7 @@ function runMigration(fromWilddog, toWilddog, inPlace) {
       });
     }
   }, function(error) {
-    console.log("There was an error getting the old GeoDog data: " + error);
+    console.log("There was an error getting the old WildGeo data: " + error);
   });
 }
 

@@ -1,16 +1,16 @@
 /**
- * 创建一个GeoDog实例
+ * 创建一个WildGeo实例
  * @constructor
- * @this {GeoDog}
- * @param {Wilddog} 存储GeoDog数据的Wilddog数据库wilddogRef.
+ * @this {WildGeo}
+ * @param {Wilddog} 存储WildGeo数据的Wilddog数据库wilddogRef.
  */
-var GeoDog = function(wilddogRef) {
+var WildGeo = function(wilddogRef) {
   /********************/
   /*  PUBLIC METHODS  */
   /********************/
   /**
-   * 返回创建GeoDog实例的Wilddog实例
-   * @return {Wilddog} 用来创建GeoDog实例的Wilddog实例
+   * 返回创建WildGeo实例的Wilddog实例
+   * @return {Wilddog} 用来创建WildGeo实例的Wilddog实例
    */
   this.ref = function() {
     return _wilddogRef;
@@ -18,7 +18,7 @@ var GeoDog = function(wilddogRef) {
 
   /*
    * 往Wilddog中写入key-location数据对。当写入成功后返回一个空的promise。
-   * 如果要存入的key在GeoDog中已经存在，将被覆盖重写。
+   * 如果要存入的key在WildGeo中已经存在，将被覆盖重写。
    * @param {string|Object} keyOrLocations 代表被增加的位置的key或者代表要被添加的key-location数据对。
    * @param {Array.<number>|undefined} location 要被添加的经纬坐标数组。
    * @return {Promise.<>} 写入成功后执行的Promise
@@ -49,7 +49,7 @@ var GeoDog = function(wilddogRef) {
         validateLocation(location);
 
         var geohash = encodeGeohash(location);
-        newData[key] = encodeGeoDogObject(location, geohash);
+        newData[key] = encodeWildGeoObject(location, geohash);
       }
     });
 
@@ -80,7 +80,7 @@ var GeoDog = function(wilddogRef) {
         if (dataSnapshot.val() === null) {
           resolve(null);
         } else {
-          resolve(decodeGeoDogObject(dataSnapshot.val()));
+          resolve(decodeWildGeoObject(dataSnapshot.val()));
         }
       }, function (error) {
         reject("Error: Wilddog synchronization failed: " + error);
@@ -89,8 +89,8 @@ var GeoDog = function(wilddogRef) {
   };
 
   /**
-   * 删除GeoDog中的key，删除成功后返回一个空的promise
-   * 如果参数key不在GeoDog中，promise仍能成功解析。
+   * 删除WildGeo中的key，删除成功后返回一个空的promise
+   * 如果参数key不在WildGeo中，promise仍能成功解析。
    * @param {string} key 被删除的地理位置的key值
    * @return {Promise.<string>} 输入的key被删除后返回的promise
    */
@@ -99,7 +99,7 @@ var GeoDog = function(wilddogRef) {
   };
 
   /**
-   * 根据查询条件返回一个新的GeoDog实例。
+   * 根据查询条件返回一个新的WildGeo实例。
    * @param {Object} queryCriteria 指定了圆心坐标和半径的查询条件
    * @return {GeoQuery} 一个新的GeoQuery对象
    */
@@ -125,7 +125,7 @@ var GeoDog = function(wilddogRef) {
  * @param {Array.<number>} location2 第二个位置的经纬度坐标数组
  * @return {number} 两点间的距离，单位km
  */
-GeoDog.distance = function(location1, location2) {
+WildGeo.distance = function(location1, location2) {
   validateLocation(location1);
   validateLocation(location2);
 

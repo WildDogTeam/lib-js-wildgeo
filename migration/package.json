@@ -1,6 +1,6 @@
 {
-  "name": "geodog-migration",
-  "description": "Migrates GeoDog v2 datasets to v3",
+  "name": "wildgeo-migration",
+  "description": "Migrates WildGeo v2 datasets to v3",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

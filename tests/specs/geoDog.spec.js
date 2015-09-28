@@ -1,4 +1,4 @@
-describe("GeoDog Tests:", function() {
+describe("WildGeo Tests:", function() {
   // Reset the Wilddog before each test
   beforeEach(function(done) {
     beforeEachHelper(done);
@@ -11,18 +11,18 @@ describe("GeoDog Tests:", function() {
   describe("Constructor:", function() {
     it("Constructor throws errors given invalid Wilddog references", function() {
       invalidWilddogRefs.forEach(function(invalidWilddogRef) {
-        expect(function() { new GeoDog(invalidWilddogRef); }).toThrow();
+        expect(function() { new WildGeo(invalidWilddogRef); }).toThrow();
       });
     });
 
     it("Constructor does not throw errors given valid Wilddog references", function() {
-      expect(function() { new GeoDog(wilddogRef); }).not.toThrow();
+      expect(function() { new WildGeo(wilddogRef); }).not.toThrow();
     });
   });
 
   describe("ref():", function() {
-    it("ref() returns the Wilddog reference used to create a GeoDog instance", function() {
-      expect(geoDog.ref()).toBe(wilddogRef);
+    it("ref() returns the Wilddog reference used to create a WildGeo instance", function() {
+      expect(wildGeo.ref()).toBe(wilddogRef);
     });
   });
 
@@ -31,7 +31,7 @@ describe("GeoDog Tests:", function() {
 
       var cl = new Checklist(["p1"], expect, done);
 
-      geoDog.set("loc1", [0, 0]).then(function() {
+      wildGeo.set("loc1", [0, 0]).then(function() {
         cl.x("p1");
       });
     });
@@ -39,14 +39,14 @@ describe("GeoDog Tests:", function() {
     it("set() updates Wilddog when adding new locations", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4"], expect, done);
 
-      geoDog.set("loc1", [0, 0]).then(function() {
+      wildGeo.set("loc1", [0, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.set("loc2", [50, 50]);
+        return wildGeo.set("loc2", [50, 50]);
       }).then(function() {
         cl.x("p2");
 
-        return geoDog.set("loc3", [-90, -90]);
+        return wildGeo.set("loc3", [-90, -90]);
       }).then(function() {
         cl.x("p3");
 
@@ -65,14 +65,14 @@ describe("GeoDog Tests:", function() {
     it("set() handles decimal latitudes and longitudes", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4"], expect, done);
 
-      geoDog.set("loc1", [0.254, 0]).then(function() {
+      wildGeo.set("loc1", [0.254, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.set("loc2", [50, 50.293403]);
+        return wildGeo.set("loc2", [50, 50.293403]);
       }).then(function() {
         cl.x("p2");
 
-        return geoDog.set("loc3", [-82.614, -90.938]);
+        return wildGeo.set("loc3", [-82.614, -90.938]);
       }).then(function() {
         cl.x("p3");
 
@@ -91,18 +91,18 @@ describe("GeoDog Tests:", function() {
     it("set() updates wilddog when changing a pre-existing key", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5"], expect, done);
 
-      geoDog.set("loc1", [0, 0]).then(function() {
+      wildGeo.set("loc1", [0, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.set("loc2", [50, 50]);
+        return wildGeo.set("loc2", [50, 50]);
       }).then(function() {
         cl.x("p2");
 
-        return geoDog.set("loc3", [-90, -90]);
+        return wildGeo.set("loc3", [-90, -90]);
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.set("loc1", [2, 3]);
+        return wildGeo.set("loc1", [2, 3]);
       }).then(function() {
         cl.x("p4");
 
@@ -121,18 +121,18 @@ describe("GeoDog Tests:", function() {
     it("set() updates wilddog when changing a pre-existing key to the same location", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5"], expect, done);
 
-      geoDog.set("loc1", [0, 0]).then(function() {
+      wildGeo.set("loc1", [0, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.set("loc2", [50, 50]);
+        return wildGeo.set("loc2", [50, 50]);
       }).then(function() {
         cl.x("p2");
 
-        return geoDog.set("loc3", [-90, -90]);
+        return wildGeo.set("loc3", [-90, -90]);
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.set("loc1", [0, 0]);
+        return wildGeo.set("loc1", [0, 0]);
       }).then(function() {
         cl.x("p4");
 
@@ -151,14 +151,14 @@ describe("GeoDog Tests:", function() {
     it("set() handles multiple keys at the same location", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4"], expect, done);
 
-      geoDog.set("loc1", [0, 0]).then(function() {
+      wildGeo.set("loc1", [0, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.set("loc2", [0, 0]);
+        return wildGeo.set("loc2", [0, 0]);
       }).then(function() {
         cl.x("p2");
 
-        return geoDog.set("loc3", [0, 0]);
+        return wildGeo.set("loc3", [0, 0]);
       }).then(function() {
         cl.x("p3");
 
@@ -177,42 +177,42 @@ describe("GeoDog Tests:", function() {
     it("set() updates wilddog after complex operations", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10", "p11"], expect, done);
 
-      geoDog.set("loc:1", [0, 0]).then(function() {
+      wildGeo.set("loc:1", [0, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.set("loc2", [50, 50]);
+        return wildGeo.set("loc2", [50, 50]);
       }).then(function() {
         cl.x("p2");
 
-        return geoDog.set("loc%!A72f()3", [-90, -90]);
+        return wildGeo.set("loc%!A72f()3", [-90, -90]);
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.remove("loc2");
+        return wildGeo.remove("loc2");
       }).then(function() {
         cl.x("p4");
 
-        return geoDog.set("loc2", [0.2358, -72.621]);
+        return wildGeo.set("loc2", [0.2358, -72.621]);
       }).then(function() {
         cl.x("p5");
 
-        return geoDog.set("loc4", [87.6, -130]);
+        return wildGeo.set("loc4", [87.6, -130]);
       }).then(function() {
         cl.x("p6");
 
-        return geoDog.set("loc5", [5, 55.555]);
+        return wildGeo.set("loc5", [5, 55.555]);
       }).then(function() {
         cl.x("p7");
 
-        return geoDog.set("loc5", null);
+        return wildGeo.set("loc5", null);
       }).then(function() {
         cl.x("p8");
 
-        return geoDog.set("loc:1", [87.6, -130]);
+        return wildGeo.set("loc:1", [87.6, -130]);
       }).then(function() {
         cl.x("p9");
 
-        return geoDog.set("loc6", [-72.258, 0.953215]);
+        return wildGeo.set("loc6", [-72.258, 0.953215]);
       }).then(function() {
         cl.x("p10");
 
@@ -233,7 +233,7 @@ describe("GeoDog Tests:", function() {
     it("set() does not throw errors given valid keys", function() {
       validKeys.forEach(function(validKey) {
         expect(function() {
-          geoDog.set(validKey, [0, 0]);
+          wildGeo.set(validKey, [0, 0]);
         }).not.toThrow();
       });
     });
@@ -241,7 +241,7 @@ describe("GeoDog Tests:", function() {
     it("set() throws errors given invalid keys", function() {
       invalidKeys.forEach(function(invalidKey) {
         expect(function() {
-          geoDog.set(invalidKey, [0, 0]);
+          wildGeo.set(invalidKey, [0, 0]);
         }).toThrow();
       });
     });
@@ -249,7 +249,7 @@ describe("GeoDog Tests:", function() {
     it("set() does not throw errors given valid locations", function() {
       validLocations.forEach(function(validLocation, i) {
         expect(function() {
-          geoDog.set("loc", validLocation);
+          wildGeo.set("loc", validLocation);
         }).not.toThrow();
       });
     });
@@ -259,7 +259,7 @@ describe("GeoDog Tests:", function() {
         // Setting location to null is valid since it will remove the key
         if (invalidLocation !== null) {
           expect(function() {
-            geoDog.set("loc", invalidLocation);
+            wildGeo.set("loc", invalidLocation);
           }).toThrow();
         }
       });
@@ -271,7 +271,7 @@ describe("GeoDog Tests:", function() {
 
       var cl = new Checklist(["p1"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0]
       }).then(function() {
         cl.x("p1");
@@ -281,7 +281,7 @@ describe("GeoDog Tests:", function() {
     it("set() updates Wilddog when adding new locations", function(done) {
       var cl = new Checklist(["p1", "p2"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [50, 50],
         "loc3": [-90, -90]
@@ -303,7 +303,7 @@ describe("GeoDog Tests:", function() {
     it("set() handles decimal latitudes and longitudes", function(done) {
       var cl = new Checklist(["p1", "p2"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0.254, 0],
         "loc2": [50, 50.293403],
         "loc3": [-82.614, -90.938]
@@ -325,14 +325,14 @@ describe("GeoDog Tests:", function() {
     it("set() updates Willddog when changing a pre-existing key", function(done) {
       var cl = new Checklist(["p1", "p2", "p3"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [50, 50],
         "loc3": [-90, -90]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.set({
+        return wildGeo.set({
           "loc1": [2, 3]
         });
       }).then(function() {
@@ -353,14 +353,14 @@ describe("GeoDog Tests:", function() {
     it("set() updates willddog when changing a pre-existing key to the same location", function(done) {
       var cl = new Checklist(["p1", "p2", "p3"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [50, 50],
         "loc3": [-90, -90]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.set({
+        return wildGeo.set({
           "loc1": [0, 0]
         });
       }).then(function() {
@@ -381,7 +381,7 @@ describe("GeoDog Tests:", function() {
     it("set() handles multiple keys at the same location", function(done) {
       var cl = new Checklist(["p1", "p2"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [0, 0],
         "loc3": [0, 0]
@@ -403,18 +403,18 @@ describe("GeoDog Tests:", function() {
     it("set() updates willddog after complex operations", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5", "p6"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc:1": [0, 0],
         "loc2": [50, 50],
         "loc%!A72f()3": [-90, -90]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.remove("loc2");
+        return wildGeo.remove("loc2");
       }).then(function() {
         cl.x("p2");
 
-        return geoDog.set({
+        return wildGeo.set({
           "loc2": [0.2358, -72.621],
           "loc4": [87.6, -130],
           "loc5": [5, 55.555]
@@ -422,13 +422,13 @@ describe("GeoDog Tests:", function() {
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.set({
+        return wildGeo.set({
           "loc5": null
         });
       }).then(function() {
         cl.x("p4");
 
-        return geoDog.set({
+        return wildGeo.set({
           "loc:1": [87.6, -130],
           "loc6": [-72.258, 0.953215]
         });
@@ -454,7 +454,7 @@ describe("GeoDog Tests:", function() {
         expect(function() {
           var locations = {};
           locations[validKey] = [0, 0];
-          geoDog.set(locations);
+          wildGeo.set(locations);
         }).not.toThrow();
       });
     });
@@ -465,7 +465,7 @@ describe("GeoDog Tests:", function() {
           expect(function() {
               var locations = {};
               locations[invalidKey] = [0, 0];
-              geoDog.set(locations);
+              wildGeo.set(locations);
           }).toThrow();
         }
       });
@@ -473,7 +473,7 @@ describe("GeoDog Tests:", function() {
 
     it("set() throws errors given a location argument in combination with an object", function() {
       expect(function() {
-        geoDog.set({
+        wildGeo.set({
           "loc": [0, 0]
         }, [0, 0]);
       }).toThrow();
@@ -482,7 +482,7 @@ describe("GeoDog Tests:", function() {
     it("set() does not throw errors given valid locations", function() {
       validLocations.forEach(function(validLocation, i) {
         expect(function() {
-          geoDog.set({
+          wildGeo.set({
             "loc": validLocation
           });
         }).not.toThrow();
@@ -494,7 +494,7 @@ describe("GeoDog Tests:", function() {
         // Setting location to null is valid since it will remove the key
         if (invalidLocation !== null) {
           expect(function() {
-            geoDog.set({
+            wildGeo.set({
               "loc": invalidLocation
             });
           }).toThrow();
@@ -507,7 +507,7 @@ describe("GeoDog Tests:", function() {
     it("get() returns a promise", function(done) {
       var cl = new Checklist(["p1"], expect, done);
 
-      geoDog.get("loc1").then(function() {
+      wildGeo.get("loc1").then(function() {
         cl.x("p1");
       });
     });
@@ -515,7 +515,7 @@ describe("GeoDog Tests:", function() {
     it("get() returns null for non-existent keys", function(done) {
       var cl = new Checklist(["p1"], expect, done);
 
-      geoDog.get("loc1").then(function(location) {
+      wildGeo.get("loc1").then(function(location) {
         expect(location).toBeNull();
 
         cl.x("p1");
@@ -525,24 +525,24 @@ describe("GeoDog Tests:", function() {
     it("get() retrieves locations given existing keys", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [50, 50],
         "loc3": [-90, -90]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toEqual([0, 0]);
         cl.x("p2");
 
-        return geoDog.get("loc2");
+        return wildGeo.get("loc2");
       }).then(function(location) {
         expect(location).toEqual([50, 50]);
         cl.x("p3");
 
-        return geoDog.get("loc3");
+        return wildGeo.get("loc3");
       }).then(function(location) {
         expect(location).toEqual([-90, -90]);
         cl.x("p4");
@@ -551,13 +551,13 @@ describe("GeoDog Tests:", function() {
 
     it("get() does not throw errors given valid keys", function() {
       validKeys.forEach(function(validKey) {
-        expect(function() { geoDog.get(validKey); }).not.toThrow();
+        expect(function() { wildGeo.get(validKey); }).not.toThrow();
       });
     });
 
     it("get() throws errors given invalid keys", function() {
       invalidKeys.forEach(function(invalidKey) {
-        expect(function() { geoDog.get(invalidKey); }).toThrow();
+        expect(function() { wildGeo.get(invalidKey); }).toThrow();
       });
     });
   });
@@ -566,23 +566,23 @@ describe("GeoDog Tests:", function() {
     it("set() removes existing location given null", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [2, 3]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toEqual([0, 0]);
 
         cl.x("p2");
 
-        return geoDog.set("loc1", null);
+        return wildGeo.set("loc1", null);
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toBeNull();
 
@@ -601,20 +601,20 @@ describe("GeoDog Tests:", function() {
     it("set() does nothing given a non-existent location and null", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5"], expect, done);
 
-      geoDog.set("loc1", [0, 0]).then(function() {
+      wildGeo.set("loc1", [0, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toEqual([0, 0]);
 
         cl.x("p2");
 
-        return geoDog.set("loc2", null);
+        return wildGeo.set("loc2", null);
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.get("loc2");
+        return wildGeo.get("loc2");
       }).then(function(location) {
         expect(location).toBeNull();
 
@@ -633,26 +633,26 @@ describe("GeoDog Tests:", function() {
     it("set() removes existing location given null", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [2, 3]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toEqual([0, 0]);
 
         cl.x("p2");
 
-        return geoDog.set({
+        return wildGeo.set({
           "loc1": null,
           "loc3": [-90, -90]
         });
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toBeNull();
 
@@ -672,19 +672,19 @@ describe("GeoDog Tests:", function() {
     it("set() does nothing given a non-existent location and null", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": null
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toEqual([0, 0]);
 
         cl.x("p2");
 
-        return geoDog.get("loc2");
+        return wildGeo.get("loc2");
       }).then(function(location) {
         expect(location).toBeNull();
 
@@ -703,23 +703,23 @@ describe("GeoDog Tests:", function() {
     it("remove() removes existing location", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc:^%*1": [0, 0],
         "loc2": [2, 3]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.get("loc:^%*1");
+        return wildGeo.get("loc:^%*1");
       }).then(function(location) {
         expect(location).toEqual([0, 0]);
 
         cl.x("p2");
 
-        return geoDog.remove("loc:^%*1");
+        return wildGeo.remove("loc:^%*1");
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.get("loc:^%*1");
+        return wildGeo.get("loc:^%*1");
       }).then(function(location) {
         expect(location).toBeNull();
 
@@ -738,20 +738,20 @@ describe("GeoDog Tests:", function() {
     it("remove() does nothing given a non-existent location", function(done) {
       var cl = new Checklist(["p1", "p2", "p3", "p4", "p5"], expect, done);
 
-      geoDog.set("loc1", [0, 0]).then(function() {
+      wildGeo.set("loc1", [0, 0]).then(function() {
         cl.x("p1");
 
-        return geoDog.get("loc1");
+        return wildGeo.get("loc1");
       }).then(function(location) {
         expect(location).toEqual([0, 0]);
 
         cl.x("p2");
 
-        return geoDog.remove("loc2");
+        return wildGeo.remove("loc2");
       }).then(function() {
         cl.x("p3");
 
-        return geoDog.get("loc2");
+        return wildGeo.get("loc2");
       }).then(function(location) {
         expect(location).toBeNull();
 
@@ -770,14 +770,14 @@ describe("GeoDog Tests:", function() {
     it("remove() only removes one key if multiple keys are at the same location", function(done) {
       var cl = new Checklist(["p1", "p2", "p3"], expect, done);
 
-      geoDog.set({
+      wildGeo.set({
         "loc1": [0, 0],
         "loc2": [2, 3],
         "loc3": [0, 0]
       }).then(function() {
         cl.x("p1");
 
-        return geoDog.remove("loc1");
+        return wildGeo.remove("loc1");
       }).then(function() {
         cl.x("p2");
 
@@ -794,20 +794,20 @@ describe("GeoDog Tests:", function() {
 
     it("remove() does not throw errors given valid keys", function() {
       validKeys.forEach(function(validKey) {
-        expect(function() { geoDog.remove(validKey); }).not.toThrow();
+        expect(function() { wildGeo.remove(validKey); }).not.toThrow();
       });
     });
 
     it("remove() throws errors given invalid keys", function() {
       invalidKeys.forEach(function(invalidKey) {
-        expect(function() { geoDog.remove(invalidKey); }).toThrow();
+        expect(function() { wildGeo.remove(invalidKey); }).toThrow();
       });
     });
   });
 
   describe("query():", function() {
     it("query() returns GeoQuery instance", function() {
-      geoQueries.push(geoDog.query({center: [1,2], radius: 1000}));
+      geoQueries.push(wildGeo.query({center: [1,2], radius: 1000}));
 
       expect(geoQueries[0] instanceof GeoQuery).toBeTruthy();
     });
@@ -815,14 +815,14 @@ describe("GeoDog Tests:", function() {
     it("query() does not throw errors given valid query criteria", function() {
       validQueryCriterias.forEach(function(validQueryCriteria) {
         if (typeof validQueryCriteria.center !== "undefined" && typeof validQueryCriteria.radius !== "undefined") {
-          expect(function() { geoDog.query(validQueryCriteria); }).not.toThrow();
+          expect(function() { wildGeo.query(validQueryCriteria); }).not.toThrow();
         }
       });
     });
 
     it("query() throws errors given invalid query criteria", function() {
       invalidQueryCriterias.forEach(function(invalidQueryCriteria) {
-        expect(function() { geoDog.query(invalidQueryCriteria); }).toThrow();
+        expect(function() { wildGeo.query(invalidQueryCriteria); }).toThrow();
       });
     });
   });

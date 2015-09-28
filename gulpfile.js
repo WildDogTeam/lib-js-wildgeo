@@ -32,8 +32,8 @@ var paths = {
     dest: {
       dir: "dist",
       files: {
-        unminified: "geodog.js",
-        minified: "geodog.min.js"
+        unminified: "wildgeo.js",
+        minified: "wildgeo.min.js"
       }
     }
   },
@@ -88,15 +88,7 @@ gulp.task("scripts", function() {
     .pipe(concat(paths.scripts.dest.files.minified))
 
     // Write minified version to the distribution directory
-    .pipe(gulp.dest(paths.scripts.dest.dir))
-
-    // Write minified version to the examples directories
-    .pipe(gulp.dest("examples/fish1/js/vendor/"))
-    .pipe(gulp.dest("examples/fish2/js/vendor/"))
-    .pipe(gulp.dest("examples/fish3/js/vendor/"))
-    .pipe(gulp.dest("examples/sfVehicles/js/vendor/"))
-    .pipe(gulp.dest("examples/queryBuilder/js/vendor/"))
-    .pipe(gulp.dest("examples/html5Geolocation/js/vendor/"));
+    .pipe(gulp.dest(paths.scripts.dest.dir));
 });
 
 /* Uses the Karma test runner to run the Jasmine tests */
