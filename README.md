@@ -38,6 +38,7 @@ GeoDog 是 Wilddog 的一个轻量级附加组件。GeoDog简单地将它的数�
 
 使用上面提到的URL可以从Wilddog的CDN上下载到GeoDog的精简版和非精简版。你也可以从Wilddog的Github中下载他们。当然啦，Wilddog和RSVP可以在各自的官网上下载。
 
+<!--
 你也可以通过npm 或者 bowr安装GeoDog, 他们会自动下载依赖。
 
 ```bash
@@ -47,7 +48,7 @@ $ npm install GeoDog --save
 ```bash
 $ bower install GeoDog --save
 ```
-
+-->
 
 ## Getting Started with Wilddog
 
