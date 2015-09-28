@@ -1,14 +1,14 @@
 {
-  "name": "geo-dog",
+  "name": "wildgeo",
   "description": "使用野狗进行基于地理位置范围查询",
   "version": "0.0.0",
   "authors": [
     "Wilddog"
   ],
-  "homepage": "https://github.com/WildDogTeam/geo-dog-js/",
+  "homepage": "https://github.com/WildDogTeam/lib-js-wildgeo/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WildDogTeam/geo-dog-js.git"
+    "url": "https://github.com/WildDogTeam/lib-js-wildgeo.git"
   },
   "license": "MIT",
   "keywords": [
@@ -18,7 +18,7 @@
     "realtime",
     "geolocation"
   ],
-  "main": "dist/geo-dog.js",
+  "main": "dist/wildgeo.js",
   "ignore": [
     "**/.*",
     "src",
