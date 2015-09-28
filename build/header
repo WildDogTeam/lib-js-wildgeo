@@ -1,0 +1,16 @@
+/*!
+ * 开源js库 GeoDog 可以基于地理坐标位置存储和查询一组key值，它的核心是，只存储位置坐标的key值。
+ * 这最大的好处是能够实时地在给定的地理区域内查询key的集合,实现实时区域查询。
+ *
+ * GeoDog 0.0.0
+ * https://github.com/WildDogTeam/lib-js-wildgeo/
+ * License: MIT
+ */
+
+// Include RSVP if this is being run in node
+if (typeof module !== "undefined" && typeof process !== "undefined") {
+  var RSVP = require("rsvp");
+}
+
+var GeoDog = (function() {
+  "use strict";

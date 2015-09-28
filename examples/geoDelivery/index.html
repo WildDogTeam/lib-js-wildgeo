@@ -1,0 +1,125 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>实时快递</title>
+	<link href="css/site.css" rel="stylesheet">
+	<link href="css/buttons.css" rel="stylesheet">
+	<style type="text/css">
+		body{
+			margin:0;
+			height:100%;
+			width:100%;
+			position:absolute;
+		}
+		#mapContainer{
+			position: absolute;
+			top:0;
+			left: 0;
+			right:0;
+			bottom:0;
+		}
+		
+		#tip{
+			height: 70px;
+			background-color: #fff;
+			padding-left: 10px;
+			padding-right: 10px;
+			position:absolute;
+			font-size: 12px;
+			right: 10px;
+			bottom: 30px;
+			border-radius: 3px;
+			line-height: 30px;
+			border:1px solid #ccc;
+		}
+		#tip input{
+			border:1px solid #ddd;
+			height:23px;
+			border-radius:3px;
+			outline:none;
+		}
+
+		span {
+	  		display: block;
+	 		background-color: #fff;
+	 		border: 1px solid #ccc;
+	  		color: #0000FF;
+	  		font-size: 10px;
+	  		position: absolute;
+	  		border-radius: 3px;
+	  		top: 32px;
+			left: -2px;
+			padding: 1px;
+ 			width: 27px;
+  			text-align: center;	
+		}
+
+		span1 {
+			display: block;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			color: #0000FF;
+			font-size: 12px;
+			position: absolute;
+			border-radius: 3px;
+			top: 34px;
+			width: 36px;
+			left: -10px;
+			padding: 2px;
+			text-align: center;	
+		}
+	</style>
+
+
+</head>
+
+<body>
+  <div id="mapContainer"></div>
+  <!-- SIDE BAR -->
+  <div id="sidebar-wrapper"></div>
+  <article id="sidebar" class="animated bounceInUp">
+    <header>
+      <h1><i class="icon-globe"></i> 野狗 Wilddog</h1>
+      <h2><a target="_blank" href="https://www.wilddog.com">powered by <strong>Wilddog</strong></a></h2>
+    </header>
+
+    <section class="content">
+      <h3>"瞬达"快递公司(虚拟)配送员定位系统</h3>
+      <p>
+        目标：此系统是帮助配送站调度员，查看站点周边3KM范围内快递员的实时位置，进而实现路径规划、准点率监控等高级功能。
+      </p>
+      <p>	
+	原理：快递员通过身上的2G+GPS设备实时传送定位信息到野狗云端，定位数据再由云端实时同步到"瞬达"配送站的调度员电脑中，并通过野狗SDK+高德地图动态展示出来。
+      </p>
+
+    </section>
+
+    <footer>
+      <a target="_blank" href="https://github.com/WildDogTeam/demo-js-geo/" class="button button-large button-block button-primary button-rounded"><i class="icon-github"></i> Download</a>
+    </footer>
+  </article>
+
+  <!-- JAVASCRIPT -->
+  <!-- gaode Maps -->
+  <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=76f167aa351abefe78920b55777f9be6"></script>
+  <!-- Wilddog -->
+  <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+  <!-- RSVP -->
+  <script src="./rsvp.min.js"></script>
+  <!-- GeoDog -->
+  <script src="./geodog.min.js"></script>
+
+  <!-- Lo-Dash-->
+  <script src="./lodash.min.js"></script> 
+
+  <!-- Custom JavaScript -->
+  <script src="./delivery.js"></script>
+
+  <script>initializeMap();</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Adding and querying example</title>
+
+    <!-- jQuery -->
+    <script src="js/vendor/jquery-1.11.1.min.js"></script>
+
+ 	<!-- Wilddog -->
+	<script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+   
+	<!-- RSVP -->
+    <script src="js/vendor/rsvp.min.js"></script>
+
+    <!-- GeoDog -->
+    <script src="js/vendor/geodog.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/queryBuilder.js" defer></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/queryBuilder.css">
+  </head>
+
+  <body>
+
+    <!-- Add fish  -->
+    <form id="addfish">
+      <label>
+        Lat: <input id="addlat" type="number" step="any" min="-90" max="90" required>
+      </label>
+      <label>
+        Lon: <input id="addlon" type="number" step="any" min="-180" max="180" required>
+      </label>
+      <input type="submit" value="add fish">
+    </form>
+
+    <!-- Query fish  -->
+    <form id="queryfish">
+      <label>
+        Lat: <input id="querylat" type="number" step="any" min="-90" max="90" required>
+      </label>
+      <label>
+        Lon: <input id="querylon" type="number" step="any" min="-180" max="180" required>
+      </label>
+      <label>
+        Radius: <input id="queryradius" type="number" step="any" min="0" max="40000" required>
+      </label>
+      <input type="submit" value="query">
+    </form>
+
+    <!-- Message log -->
+    <div id="log"></div>
+  </body>
+</html>

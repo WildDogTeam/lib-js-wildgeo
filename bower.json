@@ -1,0 +1,41 @@
+{
+  "name": "geo-dog",
+  "description": "使用野狗进行基于地理位置范围查询",
+  "version": "0.0.0",
+  "authors": [
+    "Wilddog"
+  ],
+  "homepage": "https://github.com/WildDogTeam/geo-dog-js/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WildDogTeam/geo-dog-js.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "geoquery",
+    "location",
+    "wilddog",
+    "realtime",
+    "geolocation"
+  ],
+  "main": "dist/geo-dog.js",
+  "ignore": [
+    "**/.*",
+    "src",
+    "build",
+    "tests",
+    "examples",
+    "node_modules",
+    "bower_components",
+    "wilddog.json",
+    "package.json",
+    "gulpfile.js",
+    "changelog.txt"
+  ],
+  "dependencies": {
+    "rsvp": "3.0.x"
+  },
+  "devDependencies": {
+    "jasmine": "~2.0.0"
+  }
+}
