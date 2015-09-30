@@ -67,10 +67,10 @@ $ bower install wildgeo --save
 
 
 - new WildGeo(WilddogRef)
-创建并返回一个新的`WildGeo`实例来操作地理位置数据，这些地理位置数据将被存储在 wilddogRef 指向的节点中。注意，这个 wilddogRef必须能到达你的Wilddog数据库中的任何节点。
+创建并返回一个新的`WildGeo`实例来操作地理位置数据，这些地理位置数据将被存储在 wilddogRef 指向的节点中。
 
 - WildGeo.set(keyOrLocations[, location])
-添加指定的key - 位置对到WildGeo.如果提供的`keyOrLocations`参数是一个string字符串， 只有这一个位置信息会被添加。 `keyOrLocations`参数也可以是一个包含key值和位置数值的Map对象，你可以一次写入多个位置数据，这样更加高效。
+添加指定的key - 位置对到WildGeo。
 
 - WildGeo.get(key)
 抓取对应`key`存储的位置信息。
