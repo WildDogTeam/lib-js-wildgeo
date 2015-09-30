@@ -5,15 +5,10 @@
 WildGeo 使用 [Wilddog](https://www.wilddog.com) 数据库进行数据存储，允许查询结果根据数据变化实时变化。
 
 
-## 示例使用
+## 在线示例
 
 我们提供了一个实例，这个实例将展示在北京市某片区域内的某快递公司快递员的实时动态位置信息，点击地图内的任意点更改紫色圆圈的位置。
 [![ 在 GeoMap 演示截图](screenshot.jpg)](http://geomap.wilddogapp.com/)
-
-## 在你的数据上集成WildGeo
-
-WildGeo 是 Wilddog 的一个轻量级附加组件。WildGeo 简单地将它的数据以自己的格式和位置存储在Wilddog数据库中。因此在保持你现有数据的格式和安全规则都不变的情况下也能提供一个简单的地理查询解决方案。
-
 
 ## 本地运行
 首先确认本机已经安装 [Node.js](http://nodejs.org/) 运行环境，然后执行下列指令：
@@ -120,4 +115,4 @@ lib-js-wildgeo is built on and with the aid of several  projects. We would like 
 Open Source:
 
 * [GeoFire](https://github.com/firebase/geofire-js) Realtime location queries with Firebase
-* [Jquery](query.com) The Write Less, Do More, JavaScript Library
+* [JQuery](http://jquery.com) The Write Less, Do More, JavaScript Library
