@@ -1,8 +1,8 @@
 # lib-js-wildgeo — Wilddog 实现实时位置查询
 
-开源js库 WildGeo 可以基于地理坐标位置存储和查询一组key值，它的核心是存储位置坐标的key值。这最大的好处是能够实时地在给定的地理区域内查询符合条件的key值。
+基于地理坐标位置存储，使用存储位置坐标的geo hash值查询附近的信息。结合[野狗实时](https://www.wilddog.com)，能够动态跟踪给定的地理区域内移动的数据。
 
-WildGeo 使用 [Wilddog](https://www.wilddog.com) 数据库进行数据存储，允许查询结果根据数据变化实时变化。WildGeo *选择性地加载特定位置附近的数据， 能够使你的应用轻量而且高响应*，即使你的数据库里存在一个巨大的数据集。
+WildGeo 使用 [Wilddog](https://www.wilddog.com) 数据库进行数据存储，允许查询结果根据数据变化实时变化。
 
 
 ## 示例使用
@@ -12,7 +12,7 @@ WildGeo 使用 [Wilddog](https://www.wilddog.com) 数据库进行数据存储，
 
 ## 在你的数据上集成WildGeo
 
-WildGeo 是 Wilddog 的一个轻量级附加组件。WildGeo简单地将它的数据以自己的格式和位置存储在Wilddog数据库中。因此在保持你现有数据的格式和安全规则都不变的情况下也能提供一个简单的地理查询解决方案。
+WildGeo 是 Wilddog 的一个轻量级附加组件。WildGeo 简单地将它的数据以自己的格式和位置存储在Wilddog数据库中。因此在保持你现有数据的格式和安全规则都不变的情况下也能提供一个简单的地理查询解决方案。
 
 
 ## 本地运行
@@ -62,7 +62,6 @@ $ npm install wildgeo --save
 ```bash
 $ bower install wildgeo --save
 ```
-
 
 
 ## TODO
