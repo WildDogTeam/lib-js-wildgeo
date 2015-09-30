@@ -1,7 +1,7 @@
 {
   "name": "wildgeo",
   "description": "使用野狗进行基于地理位置范围查询",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "authors": [
     "Wilddog"
   ],

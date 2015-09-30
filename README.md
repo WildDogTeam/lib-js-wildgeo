@@ -1,28 +1,42 @@
-# WildGeo for JavaScript — Wilddog 实现实时位置查询
+# lib-js-wildgeo — Wilddog 实现实时位置查询
 
-
-开源js库 WildGeo 可以基于地理坐标位置存储和查询一组key值，它的核心是，只存储位置坐标的key值。这最大的好处是能够实时地在给定的地理区域内查询符合条件的key值。
+开源js库 WildGeo 可以基于地理坐标位置存储和查询一组key值，它的核心是存储位置坐标的key值。这最大的好处是能够实时地在给定的地理区域内查询符合条件的key值。
 
 WildGeo 使用 [Wilddog](https://www.wilddog.com) 数据库进行数据存储，允许查询结果根据数据变化实时变化。WildGeo *选择性地加载特定位置附近的数据， 能够使你的应用轻量而且高响应*，即使你的数据库里存在一个巨大的数据集。
 
 
-### 在你的数据上集成WildGeo
+## 示例使用
 
+我们提供了一个实例，这个实例将展示在北京市某片区域内的某快递公司快递员的实时动态位置信息，点击地图内的任意点更改紫色圆圈的位置。
+[![ 在 GeoMap 演示截图](screenshot.jpg)](http://geomap.wilddogapp.com/)
+
+## 在你的数据上集成WildGeo
 
 WildGeo 是 Wilddog 的一个轻量级附加组件。WildGeo简单地将它的数据以自己的格式和位置存储在Wilddog数据库中。因此在保持你现有数据的格式和安全规则都不变的情况下也能提供一个简单的地理查询解决方案。
 
-### 示例使用
 
+## 本地运行
+首先确认本机已经安装 [Node.js](http://nodejs.org/) 运行环境，然后执行下列指令：
 
+```
+git clone git@github.com:WildDogTeam/lib-js-wildgeo.git
+cd  lib-js-wildgeo
+```
 
-假设你正在构建一个酒吧相关的APP, 你把酒吧所有的信息，如酒吧的名字,营业时间和价格区间，存储在/bars/<bar-id>中，
-然后你想为它增加一个功能，能让使用它的人用它查询出附近的酒吧，啊哈，这时候你就需要WildGeo了。你可以用WildGeo存储所有酒吧的位置信息，用酒吧的ID作为WildGeo的key值。WildGeo就能让你轻而易举地查询到哪些酒吧（IDs）在附近。如果你想展示酒吧其他的附加信息，你可以查询/bars/<bar-id>节点下存储的酒吧信息。
+安装依赖：
 
-## 实例
-我们提供了一个实例，这个实例将展示在北京市某片区域内的某快递公司快递员的实时动态位置信息，点击[实例](http://geomap.wilddogapp.com/)查看,点击地图内的任意点更改紫色圆圈的位置。
+```
+npm install
+bower install
+```
 
+启动项目：
 
-## Downloading WildGeo
+```
+gulp build
+```
+
+## 下载
 
 要在你的工程中使用WildGeo， 你需要在你的HTML页面中引入以下文件。
 ```html
@@ -38,278 +52,62 @@ WildGeo 是 Wilddog 的一个轻量级附加组件。WildGeo简单地将它的�
 
 使用上面提到的URL可以从Wilddog的CDN上下载到WildGeo的精简版和非精简版。你也可以从Wilddog的Github中下载他们。当然啦，Wilddog和RSVP可以在各自的官网上下载。
 
-<!--
+
 你也可以通过npm 或者 bowr安装WildGeo, 他们会自动下载依赖。
 
 ```bash
-$ npm install WildGeo --save
+$ npm install wildgeo --save
 ```
 
 ```bash
-$ bower install WildGeo --save
+$ bower install wildgeo --save
 ```
--->
 
-## Getting Started with Wilddog
+
+
+## TODO
+
+- 2015-09-30。 gulp 测试未完全通过
+```
+gulp test
+```
+测试结果
+```
+=============================== Coverage summary ===============================
+Statements   : 48.49% ( 209/431 )
+Branches     : 47.41% ( 110/232 )
+Functions    : 33.33% ( 21/63 )
+Lines        : 48.49% ( 209/431 )
+================================================================================
+
+```
+## 注册Wilddog
 
 WildGeo需要用Wilddog数据库存储位置数据， 你可以在此[注册](https://www.wilddog.com/my-account/signup)Wilddog账户
 
 
-## API Reference
+## 支持
+如果在使用过程中有任何问题，请提 [issue](https://github.com/WildDogTeam/lib-js-wildgeo/issues) ，我会在 Github 上给予帮助。
 
-### WildGeo
+## 相关文档
 
-WildGeo实例可以对Wilddog数据库进行读写地理位置数据和查询。
-#### new WildGeo(WilddogRef)
-创建并返回一个新的`WildGeo`实例来操作地理位置数据，这些地理位置数据将被存储在 wilddogRef 指向的节点中。注意，这个 wilddogRef必须能到达你的Wilddog数据库中的任何节点。
-
-```JavaScript
-//创建一个Wilddog引用，WildGeo将在其中存储数据。
-var wilddogRef = new Wilddog("https://<your-wilddog>.wilddogio.com/");
-
-// 创建一个WildGeo的索引
-var wildGeo = new WildGeo(wilddogRef);
-```
-
-#### WildGeo.ref()
-
-返回用来创建 WildGeo 实例的 Wilddog 引用
-```JavaScript
-var wilddogRef = new Wilddog("https://<your-wilddog>.wilddogio.com/");
-var wildGeo = new WildGeo(wilddogRef);
-
-var ref = wildGeo.ref();  // ref === wilddogRef
-```
-
-#### WildGeo.set(keyOrLocations[, location])
-添加指定的key - 位置对到WildGeo.如果提供的`keyOrLocations`参数是一个string字符串， 只有这一个位置信息会被添加。 `keyOrLocations`参数也可以是一个包含key值和位置数值的Map对象，你可以一次写入多个位置数据，这样更加高效。
-如果参数中传递的Key值已经存在于`WildGeo`中，那么它的键值对将被新的位置数据覆盖，位置信息必须是`[latitude, longitude]`格式的。
-Keys必须是 String 类型的并且是 Wilddog 数据库可用的key。
-
-```JavaScript
-wildGeo.set("some_key", [37.79, 122.41]).then(function() {
-  console.log("Provided key has been added to WildGeo");
-}, function(error) {
-  console.log("Error: " + error);
-});
-```
-
-```JavaScript
-wildGeo.set({
-  "some_key": [37.79, 122.41],
-  "another_key": [36.98, 122.56]
-}).then(function() {
-  console.log("Provided keys have been added to WildGeo");
-}, function(error) {
-  console.log("Error: " + error);
-});
-```
-
-#### WildGeo.get(key)
-
-抓取对应`key`存储的位置信息。
-如果`key`不存在， 返回值为null。
-```JavaScript
-wildGeo.get("some_key").then(function(location) {
-  if (location === null) {
-    console.log("Provided key is not in WildGeo");
-  }
-  else {
-    console.log("Provided key has a location of " + location);
-  }
-}, function(error) {
-  console.log("Error: " + error);
-});
-```
-
-#### WildGeo.remove(key)
-在`WildGeo`中删除指定的`key`,
-
-等价于调用`set(key, null)` or `set({ <key>: null })`。
-```JavaScript
-wildGeo.remove("some_key").then(function() {
-  console.log("Provided key has been removed from WildGeo");
-}, function(error) {
-  console.log("Error: " + error);
-});
-```
-
-#### WildGeo.query(queryCriteria)
-
-根据提供的`queryCriteria`查询条件，创建并返回一个新的`GeoQuery`实例
-`queryCriteria`描述了一个圆形区域的查询，必须包含以下keys:
-* `center` - 查询的圆心, 形式是 `[latitude, longitude]`
-* `radius` - 查询的半径, 单位是km。
-
-```JavaScript
-var geoQuery = wildGeo.query({
-  center: [10.38, 2.41],
-  radius: 10.5
-});
-```
-
-### GeoQuery
-
-一个查找符合查询条件的数据集合的查询，每当调用`WildGeo.query()`就会创建一个新的`GeoQuery`。
-#### GeoQuery.center()
-
-返回一个查询的圆心坐标。返回值的格式是 `[latitude, longitude]`。
-
-```JavaScript
-var geoQuery = wildGeo.query({
-  center: [10.38, 2.41],
-  radius: 10.5
-});
-
-var center = geoQuery.center();  // center === [10.38, 2.41]
-```
-
-#### GeoQuery.radius()
-
-返回查询的半径，单位是km。
-```JavaScript
-var geoQuery = wildGeo.query({
-  center: [10.38, 2.41],
-  radius: 10.5
-});
-
-var radius = geoQuery.radius();  // radius === 10.5
-```
-
-#### GeoQuery.updateCriteria(newQueryCriteria)
-
-更新查询的查询条件
-`newQueryCriteria`必须是一个包含`center`, `radius`，或者两者都包含的对象
-```JavaScript
-var geoQuery = wildGeo.query({
-  center: [10.38, 2.41],
-  radius: 10.5
-});
-
-var center = geoQuery.center();  // center === [10.38, 2.41]
-var radius = geoQuery.radius();  // radius === 10.5
-
-geoQuery.updateCriteria({
-  center: [-50.83, 100.19],
-  radius: 5
-});
-
-center = geoQuery.center();  // center === [-50.83, 100.19]
-radius = geoQuery.radius();  // radius === 5
-
-geoQuery.updateCriteria({
-  radius: 7
-});
-
-center = geoQuery.center();  // center === [-50.83, 100.19]
-radius = geoQuery.radius();  // radius === 7
-```
-
-#### GeoQuery.on(eventType, callback)
-当`eventType`触发时，查询的回调将执行。可用的`eventType`的值有：`ready`, `key_entered`, `key_exited`, and `key_moved`。`ready`事件的回调不被传递任何参数。其他的回调会被传递三个参数：
-
-1. 位置的key
-2. 位置的坐标对[latitude, longitude] 
-3. 与查询圆心的距离，单位km。
-
-当查询从服务器中初始化的时候就会触发一次`ready`事件。当所有其他的加载数据的事件触发后`ready`事件会触发。
-每次用`updateQuery()`的时候`ready`事件将被立即触发一次，当所有的数据被加载并且其他所有的事件都被触发后也会引发`ready`事件。
-当一个key进入了查询范围内时触发`key_entered`事件。当一个key从查询范围外进入查询范围内或者一个key被写入数据正好落入查询范围内时会触发`key_entered`事件。
-当一个Key从查询范围内移出查询范围时，会触发`key_exited`事件。如果这个key被彻底从`WildGeo`中删除的话，被传递给回调函数的位置信息和距离信息将为null。
-当一个key已经在查询范围内部，当它在内部发生移动的时候，会触发`key_moved`事件。
-
-返回一个`GeoCallbackRegistration`，用来取消 `callback`回调。
-```JavaScript
-var onReadyRegistration = geoQuery.on("ready", function() {
-  console.log("GeoQuery has loaded and fired all other events for initial dat");
-});
-
-var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location, distance) {
-  console.log(key + " entered query at " + location + " (" + distance + " km from center)");
-});
-
-var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location, distance) {
-  console.log(key + " exited query to " + location + " (" + distance + " km from center)");
-});
-
-var onKeyMovedRegistration = geoQuery.on("key_moved", function(key, location, distance) {
-  console.log(key + " moved within query to " + location + " (" + distance + " km from center)");
-});
-```
-
-#### GeoQuery.cancel()
-
-终止一个Geo查询，它将不再更新位置信息。所有通过`on()`附加到这个查询上的回调函数都会被取消。这个查询在未来都不能再被使用了。
-```JavaScript
-// 这个例子表达了：当一个查询范围内的key离开时，将终止监听任何事件。
-var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location, distance) {
-  console.log(key + " entered query at " + location + " (" + distance + " km from center)");
-});
-
-var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location, distance) {
-  console.log(key + " exited query to " + location + " (" + distance + " km from center)");
-
-  // 取消所有回调
-  geoQuery.cancel();
-});
-```
-
-### GeoCallbackRegistration
-
-注册事件被用来取消一个不会再被使用的`GeoQuery.on()`回调，每次调用 `GeoQuery.on()`都将返回一个新的`GeoCallbackRegistration`。当你想停止针对某个事件的回调，同时并不想取消查询的所有事件回调的时候，GeoCallbackRegistration是很有用的。
-#### GeoCallbackRegistration.cancel()
-
-取消一个事件的回调注册，于是将不会再触发回调。对其他你创建的事件回调无影响。
-```JavaScript
-
-var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location, distance) {
-  console.log(key + " entered query at " + location + " (" + distance + " km from center)");
-});
-
-var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location, distance) {
-  console.log(key + " exited query to " + location + " (" + distance + " km from center)");
-
-  // Cancel the "key_entered" callback
-  onKeyEnteredRegistration.cancel();
-});
-```
-
-### Helper Methods
-
-#### WildGeo.distance(location1, location2)
-
-返回两个位置坐标之间的距离的静态方法。
-`location1` 和 `location1` 必须是 `[latitude, longitude]`格式的.
-
-```JavaScript
-var location1 = [10.3, -55.3];
-var location2 = [-78.3, 105.6];
-
-var distance = WildGeo.distance(location1, location2);  // distance === 12378.536597423461
-```
-
-## Promises
-读写数据时，WildGeo使用promises。Promises代表一个潜在的长时间运行的操作的结果，允许代码异步执行。当操作完成的时候，promise将会根据操作结果被"resolved" 或者 "fulfilled"，结果会被传递到promise定义的`then()`方法中。
-WildGeo用轻量级别RSVP.js库提供JavaScript promises的实现。如果你对promises不熟悉，请参考[RSVP.js documentation](https://github.com/tildeio/rsvp.js/)。下面是一个promise的例子：
-
-```JavaScript
-promise.then(function(result) {
-  console.log("Promise was successfully resolved with the following value: " + result);
-}, function(error)
-  console.log("Promise was rejected with the following error: " + error);
-})
-```
+* [Wilddog 概览](https://z.wilddog.com/overview/guide)
+* [JavaScript SDK快速入门](https://z.wilddog.com/web/quickstart)
+* [JavaScript SDK 开发向导](https://z.wilddog.com/web/guide/1)
+* [JavaScript SDK API](https://z.wilddog.com/web/api)
+* [下载页面](https://www.wilddog.com/download/)
+* [Wilddog FAQ](https://z.wilddog.com/faq/qa)
 
 
-## Contributing
+## License
+MIT
+http://wilddog.mit-license.org/
 
-如果你想参与到WildGeo中来，你需要运行下列命令：
-```bash
-$ git clone https://github.com/WildDogTeam/lib-js-wildgeo.git
-$ cd wildgeo-js         # go to the wildgeo directory
-$ npm install -g gulp   # globally install gulp task runner
-$ npm install -g bower  # globally install Bower package manager
-$ npm install           # install local npm build / test dependencies
-$ bower install         # install local JavaScript dependencies
-$ gulp watch            # watch for source file changes
-```
+## 感谢 Thanks
+
+lib-js-wildgeo is built on and with the aid of several  projects. We would like to thank the following projects for helping us achieve our goals:
+
+Open Source:
+
+* [GeoFire](https://github.com/firebase/geofire-js) Realtime location queries with Firebase
+* [Jquery](query.com) The Write Less, Do More, JavaScript Library
