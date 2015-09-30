@@ -79,6 +79,7 @@ Branches     : 47.41% ( 110/232 )
 Functions    : 33.33% ( 21/63 )
 Lines        : 48.49% ( 209/431 )
 ```
+
 ## 注册Wilddog
 
 WildGeo需要用Wilddog数据库存储位置数据， 你可以在此[注册](https://www.wilddog.com/my-account/signup)Wilddog账户
