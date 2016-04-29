@@ -6,7 +6,7 @@ WildGeo 使用 [Wilddog](https://www.wilddog.com) 数据库进行数据存储，
 
 
 ## 在线示例
-
+http://geomap.wilddogapp.com/
 我们提供了一个实例，这个实例将展示在北京市某片区域内的某快递公司快递员的实时动态位置信息，点击地图内的任意点更改紫色圆圈的位置。
 [![ 在 GeoMap 演示截图](screenshot.jpg)](http://geomap.wilddogapp.com/)
 
