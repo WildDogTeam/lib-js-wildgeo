@@ -48,6 +48,8 @@ gulp build
 
 使用上面提到的URL可以从Wilddog的CDN上下载到WildGeo的精简版和非精简版。你也可以从Wilddog的Github中下载他们。当然啦，Wilddog和RSVP可以在各自的官网上下载。
 
+RSVP的下载地址是：https://github.com/tildeio/rsvp.js/
+
 
 你也可以通过npm 或者 bowr安装WildGeo, 他们会自动下载依赖。
 
